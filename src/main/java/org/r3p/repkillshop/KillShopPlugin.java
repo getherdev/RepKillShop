@@ -24,7 +24,7 @@ public class KillShopPlugin extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new KillListener(), this);
         this.getServer().getPluginManager().registerEvents(new InventoryCloseListener(this.shopManager), this);
         this.getServer().getPluginManager().registerEvents(new InventoryClickListener(this.shopManager), this);
-        this.getCommand("shopadmin").setExecutor(new ShopAdminCommand(this));
+        this.getCommand("killshopadmin").setExecutor(new ShopAdminCommand(this));
         this.getCommand("sklepzakille").setExecutor(new OpenShopCommand(this));
 
         DatabaseManager.initialize(this);
