@@ -11,7 +11,6 @@
 #  > Dla graczy:
 #   /sklepzakille (otwiera gui z sklepem)
 #
-
 # Konfiguracja bazy danych
 database:
   url: jdbc:mysql://localhost:3306/test
@@ -19,26 +18,26 @@ database:
   password: ''
 # Wiadomosci
 messages:
-  not_enough_kills: §x§A§B§1§C§2§2N§x§A§C§1§D§2§3i§x§A§E§1§D§2§3e §x§B§0§1§E§2§5p§x§B§1§1§F§2§5o§x§B§3§2§0§2§6s§x§B§4§2§0§2§7i§x§B§5§2§1§2§7a§x§B§6§2§2§2§8d§x§B§8§2§2§2§9a§x§B§9§2§3§2§9s§x§B§A§2§3§2§Az
-    §x§B§D§2§5§2§Bw§x§B§E§2§5§2§Cy§x§B§F§2§6§2§Ds§x§C§1§2§6§2§Dt§x§C§2§2§7§2§Ea§x§C§3§2§8§2§Fr§x§C§4§2§8§2§Fc§x§C§6§2§9§3§0z§x§C§7§2§A§3§1a§x§C§8§2§A§3§1j§x§C§A§2§B§3§2a§x§C§B§2§B§3§2c§x§C§C§2§C§3§3e§x§C§D§2§D§3§4j
-    §x§D§0§2§E§3§5i§x§D§1§2§E§3§6l§x§D§2§2§F§3§6o§x§D§4§3§0§3§7s§x§D§5§3§0§3§8c§x§D§6§3§1§3§8i
-    §x§D§9§3§2§3§Az§x§D§A§3§3§3§Aa§x§D§B§3§3§3§Bb§x§D§D§3§4§3§Có§x§D§E§3§5§3§Cj§x§D§F§3§5§3§Ds§x§E§0§3§6§3§Et§x§E§2§3§6§3§Ew§x§E§3§3§7§3§F!
-  purchase_success: §x§1§5§E§5§3§CP§x§1§8§E§5§3§Eo§x§1§B§E§6§4§1m§x§1§D§E§6§4§3y§x§2§0§E§6§4§5s§x§2§3§E§7§4§8l§x§2§6§E§7§4§An§x§2§8§E§7§4§Ci§x§2§B§E§8§4§Ee
-    §x§3§1§E§8§5§3z§x§3§3§E§9§5§5a§x§3§6§E§9§5§8k§x§3§9§E§9§5§Au§x§3§C§E§A§5§Cp§x§3§E§E§A§5§Fi§x§4§1§E§B§6§1l§x§4§4§E§B§6§3e§x§4§7§E§B§6§6s
-    §x§4§C§E§C§6§Ap§x§4§F§E§C§6§Dr§x§5§2§E§D§6§Fz§x§5§4§E§D§7§1e§x§5§7§E§D§7§3d§x§5§A§E§E§7§6m§x§5§D§E§E§7§8i§x§5§F§E§E§7§Ao§x§6§2§E§F§7§Dt§x§6§5§E§F§7§F!
+  not_enough_kills: '#cc0000Nie posiadasz wystarczającej liczby zabójstw!#ff2424'
+  purchase_success: '#27ff24Pomyślnie dokonano zakupu!#69ff66'
 # Konfiguracja sklepu
 shop:
-  title: '&6Sklep za Kille'
+  title: '#f62828Sklep za Kille#d04e4e'
   size: 27
   lore:
     - ''
-    - '&aCena: &e%price%'
+    - '&7Cena: &e%price%'
     - '&bKliknij &9PRAWYM &baby kupic!'
   ui_elements:
     '22':
       type: ENDER_CHEST
-      name: '&cTwoje Zabójstwa'
+      name: '#cc0000Twoje Zabójstwa#ff2424'
       lore:
-        - '&7Obecnie posiadasz %your_kills% zabójstw!'
+        - '#27ff24Obecnie posiadasz#27ff24 &c%your_kills% #27ff24zabójstw!#27ff24'
 shop-items:
-
+  '11':
+    itemstack:
+      ==: org.bukkit.inventory.ItemStack
+      v: 3578
+      type: DIRT
+    price: 11

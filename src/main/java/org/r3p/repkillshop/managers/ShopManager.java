@@ -156,8 +156,8 @@ public class ShopManager {
 
         public UIElement(Material material, String name, List<String> lore) {
             this.material = material;
-            this.name = name;
-            this.lore = lore;
+            this.name = ColorFixer.addColors(name);
+            this.lore = ColorFixer.addColors(lore);
         }
 
         public Material getMaterial() {
@@ -176,8 +176,8 @@ public class ShopManager {
             ItemStack item = new ItemStack(material);
             ItemMeta meta = item.getItemMeta();
             if (meta != null) {
-                meta.setDisplayName(ColorFixer.addColors(name));
-                meta.setLore(ColorFixer.addColors(lore));
+                meta.setDisplayName(name);
+                meta.setLore(lore);
             }
             return meta;
         }

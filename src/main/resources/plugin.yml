@@ -3,12 +3,12 @@ version: 1.0
 main: org.r3p.repkillshop.KillShopPlugin
 api-version: 1.20
 commands:
-  shopadmin:
+  killshopadmin:
     description: Admin command to manage the shop
-    usage: /shopadmin <add> <slot> <price>
+    usage: /killshopadmin <additem | givekills | clearkills | removekills | reload | removeitem>
   sklepzakille:
     description: Command to open the shop
-    usage: /sklepzakiller
+    usage: /sklepzakille
 permissions:
   killshop.admin:
     description: Allows admin to add items to the shop

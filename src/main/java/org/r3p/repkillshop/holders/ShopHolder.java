@@ -22,7 +22,7 @@ public class ShopHolder implements InventoryHolder {
     public ShopHolder(Player player, FileConfiguration config, Map<Integer, ShopManager.ShopItem> shopItemMap, Map<Integer, ShopManager.UIElement> uiElementMap) {
         String shopTitle = ColorFixer.addColors(config.getString("shop.title"));
         int shopSize = config.getInt("shop.size");
-        List<String> defaultLore = ColorFixer.addColors(config.getStringList("shop.lore"));
+        List<String> defaultLore = config.getStringList("shop.lore");
 
         inventory = Bukkit.createInventory(this, shopSize, shopTitle);
         fillUiWithItems(player, shopItemMap, uiElementMap, defaultLore);
@@ -36,9 +36,10 @@ public class ShopHolder implements InventoryHolder {
                 meta.setDisplayName(ColorFixer.addColors(entry.getValue().getName()));
                 List<String> lore = new ArrayList<>();
                 for (String line : entry.getValue().getLore()) {
-                    lore.add(line.replace("%your_kills%", String.valueOf(DatabaseManager.getKills(player.getUniqueId()))));
+                    line = line.replace("%your_kills%", String.valueOf(DatabaseManager.getKills(player.getUniqueId())));
+                    lore.add(ColorFixer.addColors(line));
                 }
-                meta.setLore(ColorFixer.addColors(lore));
+                meta.setLore(lore);
                 item.setItemMeta(meta);
             }
             inventory.setItem(entry.getKey(), item);
@@ -55,10 +56,11 @@ public class ShopHolder implements InventoryHolder {
                 }
 
                 for (String line : defaultLore) {
-                    lore.add(line.replace("%price%", String.valueOf(entry.getValue().getPrice())));
+                    line = line.replace("%price%", String.valueOf(entry.getValue().getPrice()));
+                    lore.add(ColorFixer.addColors(line));
                 }
 
-                meta.setLore(ColorFixer.addColors(lore));
+                meta.setLore(lore);
                 itemStack.setItemMeta(meta);
             }
             inventory.setItem(entry.getKey(), itemStack);
