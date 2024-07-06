@@ -1,12 +1,6 @@
 # Spis Komend:
 #
 #  > Administracyjne:
-#   /shopadmin additem <slot> <cena>
-#   /shopadmin givekills <gracz> <ilosc>
-#   /shopadmin clearkills <gracz>
-#   /shopadmin removekills <gracz> <ilosc>
-#   /shopadmin removeitem <slot>
-#   /shopadmin reload
 #
 #  > Dla graczy:
 #   /sklepzakille (otwiera gui z sklepem)

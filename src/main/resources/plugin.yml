@@ -1,7 +1,7 @@
 name: KillShop
 version: 1.0
 main: org.r3p.repkillshop.KillShopPlugin
-api-version: 1.20
+api-version: 1.16.5
 commands:
   killshopadmin:
     description: Admin command to manage the shop
