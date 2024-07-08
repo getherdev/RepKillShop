@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.r3p.repkillshop.KillShopPlugin;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,10 +20,26 @@ public class DatabaseManager {
 
     public static void initialize(KillShopPlugin plugin) {
         try {
+            String type = plugin.getConfig().getString("database.type");
             String url = plugin.getConfig().getString("database.url");
-            String user = plugin.getConfig().getString("database.user");
-            String password = plugin.getConfig().getString("database.password");
+            String user = plugin.getConfig().getString("database.user", "");
+            String password = plugin.getConfig().getString("database.password", "");
+
+            if ("sqlite".equalsIgnoreCase(type)) {
+                // Ensure the plugin's data folder exists
+                File dataFolder = plugin.getDataFolder();
+                if (!dataFolder.exists()) {
+                    dataFolder.mkdirs();
+                }
+
+                // Construct the SQLite database file path
+                File databaseFile = new File(dataFolder, "database.db");
+                url = "jdbc:sqlite:" + databaseFile.getAbsolutePath();
+            }
+
             connection = DriverManager.getConnection(url, user, password);
+
+            // Create the player_kills table if it does not exist
             try (PreparedStatement stmt = connection.prepareStatement(
                     "CREATE TABLE IF NOT EXISTS player_kills (" +
                             "uuid VARCHAR(36) PRIMARY KEY, " +
@@ -33,6 +50,7 @@ public class DatabaseManager {
             e.printStackTrace();
         }
 
+        // Schedule periodic saving of all data
         Bukkit.getScheduler().runTaskTimer(plugin, DatabaseManager::saveAll, 6000L, 6000L);
     }
 
@@ -79,7 +97,7 @@ public class DatabaseManager {
         for (Map.Entry<UUID, Integer> entry : killsCache.entrySet()) {
             try (PreparedStatement stmt = connection.prepareStatement(
                     "INSERT INTO player_kills (uuid, kills) VALUES (?, ?) " +
-                            "ON DUPLICATE KEY UPDATE kills = VALUES(kills)")) {
+                            "ON CONFLICT(uuid) DO UPDATE SET kills = excluded.kills")) {
                 stmt.setString(1, entry.getKey().toString());
                 stmt.setInt(2, entry.getValue());
                 stmt.executeUpdate();
@@ -94,7 +112,7 @@ public class DatabaseManager {
         if (killsCache.containsKey(uuid)) {
             try (PreparedStatement stmt = connection.prepareStatement(
                     "INSERT INTO player_kills (uuid, kills) VALUES (?, ?) " +
-                            "ON DUPLICATE KEY UPDATE kills = VALUES(kills)")) {
+                            "ON CONFLICT(uuid) DO UPDATE SET kills = excluded.kills")) {
                 stmt.setString(1, uuid.toString());
                 stmt.setInt(2, killsCache.get(uuid));
                 stmt.executeUpdate();

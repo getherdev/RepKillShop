@@ -19,6 +19,7 @@ public class KillShopPlugin extends JavaPlugin {
     private ShopManager shopManager;
 
     public void onEnable() {
+        saveDefaultConfig();
         this.shopManager = new ShopManager(this.getConfig(), new File(this.getDataFolder(), "config.yml"));
 
         this.getServer().getPluginManager().registerEvents(new KillListener(), this);

@@ -7,7 +7,7 @@
 #
 # Konfiguracja bazy danych
 database:
-  url: jdbc:mysql://localhost:3306/test
+  url: jdbc:sqlite:plugins/KillShop/{YOUR_DATABASE_NAME}.db #DOMYSLNIE SQLITE
   user: root
   password: ''
 # Wiadomosci
@@ -28,10 +28,4 @@ shop:
       name: '#cc0000Twoje Zabójstwa#ff2424'
       lore:
         - '#27ff24Obecnie posiadasz#27ff24 &c%your_kills% #27ff24zabójstw!#27ff24'
-shop-items:
-  '11':
-    itemstack:
-      ==: org.bukkit.inventory.ItemStack
-      v: 3578
-      type: DIRT
-    price: 11
+shop-items: {}
